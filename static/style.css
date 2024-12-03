@@ -1,0 +1,123 @@
+body {
+    background-color: black;
+    color: white;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
+  }
+  
+/* Navbar */
+.navbar {
+  position: fixed; 
+  top: 20px;
+  left: 10%;
+  right: 10%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo img {
+  border: 2px solid rgba(255, 255, 255, 0.61);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+
+/* Navbar Container */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 55px;
+  max-width: 1200px;
+  padding: 10px 20px;
+  margin: 0 30px; 
+  align-items: center;
+  border-radius: 15px; 
+}
+
+/* Navigation links */
+.nav-links {
+  padding-top: 0.9%;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+/* Navbar Link Styles */
+.navbar a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; 
+  border-radius: 5px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* Hover Effect */
+.navbar a:hover {
+  background-color: rgb(255, 255, 255);
+  color: #000; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+  transform: translateY(-2px); 
+  padding: 15px 25px; 
+}
+
+.glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+}
+
+
+  .container {
+    text-align: center;
+  }
+
+  .card-button {
+    display: flex; 
+    justify-content: center; 
+ 
+    background-color: #6a33d6; /* Button background color */
+    color: rgb(0, 0, 0);
+    padding: 15px; 
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 250px; 
+    margin-top: 10px; 
+
+}
+
+/* Button hover effect */
+.card-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-2px); 
+    padding: 15px 25px; 
+}
+
+
+.glass2{
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.786), #fefefe8a);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border:1px solid rgba(0, 0, 0, 0.273);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.41);
+}
