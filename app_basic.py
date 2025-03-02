@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 import numpy as np
 import skin_cancer_detection as SCD
 import logging
+import cv2
 
 logging.basicConfig(level=logging.INFO)
 
@@ -42,6 +43,52 @@ def upload_image():
         logging.error(f"Error in prediction: {str(e)}")
         messagebox.showerror("Error", "Error processing the image.")
 
+def capture_image():
+    """Open the webcam, capture an image, and process it."""
+    cap = cv2.VideoCapture(0)
+
+    if not cap.isOpened():
+        messagebox.showerror("Error", "Could not access the webcam.")
+        return
+
+    messagebox.showinfo("Webcam", "Press SPACEBAR to capture an image.")
+    
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            messagebox.showerror("Error", "Failed to capture image.")
+            cap.release()
+            return
+
+        cv2.imshow("Capture Image - Press SPACEBAR to Save", frame)
+        key = cv2.waitKey(1)
+
+        if key == 32:  # Spacebar to capture
+            cv2.imwrite("captured_image.jpg", frame)
+            cap.release()
+            cv2.destroyAllWindows()
+            try:
+                inputimg = Image.open("captured_image.jpg").convert("RGB")
+                inputimg = inputimg.resize((28, 28))
+                img = np.array(inputimg).reshape(-1, 28, 28, 3)
+
+                result = SCD.model.predict(img)
+                result = result.tolist()
+                max_prob = max(result[0])
+                class_ind = result[0].index(max_prob)
+                logging.info(f"Prediction: {SCD.classes[class_ind]} with probability {max_prob:.2f}")
+
+                class_label, info = class_info.get(class_ind, ("Unknown", "Information not available."))
+
+                show_results(class_label, info)
+
+            except Exception as e:
+                logging.error(f"Error in prediction: {str(e)}")
+                messagebox.showerror("Error", "Error processing the image.")
+            break
+
+
+
 def show_results(class_label, info):
     for widget in root.winfo_children():
         widget.pack_forget()
@@ -70,6 +117,8 @@ def show_upload_page():
 
     upload_button = tk.Button(root, text="Upload Image", font=("Montserrat", 10), command=upload_image, width=20, height=2)
     upload_button.pack(pady=50)
+
+    tk.Button(root, text="Capture from Camera", font=("Montserrat", 12), command=capture_image, width=25, height=2).pack(pady=20)
 
 root = tk.Tk()
 root.title("Skin Cancer Detection")
